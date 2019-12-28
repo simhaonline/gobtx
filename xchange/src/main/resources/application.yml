@@ -1,0 +1,31 @@
+app:
+  name: WebSocketServer
+  description: Web Socket Server Host
+  domain: FrontEnd
+
+
+
+logging:
+  config: classpath:log4j2-${app.env}.xml
+
+
+
+#db
+customer:
+  db:
+    config:
+      path: classpath:database/customer-db-${app.env}.properties
+
+
+
+#redis
+redis:
+  config: classpath:redis/redis-${app.env}.yml
+
+#mock-aggregator vs disruptor
+#mock-repository vs hazelcast
+#mock-market do not used in production env
+#h2 vs mysql to persist the market data
+spring:
+  profiles:
+    active: ${app.env},disruptor,hazelcast,mock-market,mysql

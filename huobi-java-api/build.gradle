@@ -1,0 +1,61 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+dependencies {
+
+    compile "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    compile "com.squareup.retrofit2:converter-jackson:$retrofit2Version"
+
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+
+
+    compile "com.alibaba:fastjson:${fastjsonVersion}"
+
+    compile("org.apache.commons:commons-lang3:${commonsLang3}")
+
+    
+    testCompile("org.hamcrest:hamcrest:$hamcrestVersion")
+    testCompile("junit:junit:$junitVersion")
+    testCompile("org.powermock:powermock-module-junit4:$powermockVersion")
+    testCompile("org.powermock:powermock-api-mockito2:$powermockVersion")
+
+
+}
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}

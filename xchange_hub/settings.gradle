@@ -1,0 +1,9 @@
+/*
+ *
+ *
+ * Internal Message exchange hub
+ * Lik the pub/sub of thing through the Netty
+ *
+ */
+
+rootProject.name = 'xchange_hub'

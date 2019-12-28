@@ -1,0 +1,8 @@
+{
+  "cdnURL": "https://xxxx.oss-cn-shanghai.aliyuncs.com",
+  "accessKeyId": "xxxx",
+  "secretAccessKey": "xxxx",
+  "bucketName": "xxx",
+  "endpoint": "http://oss-cn-shanghai.aliyuncs.com",
+  "dir": "static_dev"
+}

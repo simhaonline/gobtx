@@ -1,0 +1,102 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+bootJar { enabled = false }
+jar { enabled = true }
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+configurations {
+    //suppose log4j2
+    all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    all*.exclude group: 'org.springframework.boot',module:'spring-boot-starter-logging'
+    all*.exclude module : 'spring-boot-starter-logging'
+}
+
+
+dependencies {
+
+    compile project(":common")
+    compile project(":model")
+
+
+    compile("org.springframework.boot:spring-boot-starter") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+
+    compile "org.apache.commons:commons-lang3:$commonsLang3"
+
+    compile("org.hibernate:hibernate-validator:$hibernateValidator") {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+
+    compile("org.springframework.boot:spring-boot-starter-security")
+
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+    compile("io.jsonwebtoken:jjwt:${jjwt}")
+
+
+    compile 'org.springframework.boot:spring-boot-starter-log4j2'
+
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+
+    //compile "mysql:mysql-connector-java:${mysqlConnector}"
+    //compile "com.zaxxer:HikariCP:${hikari}"
+
+    compile("com.h2database:h2")
+
+
+    compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+    annotationProcessor  "org.springframework.boot:spring-boot-configuration-processor"
+
+
+    testCompile 'junit:junit:4.12'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+
+    testCompile("org.hamcrest:hamcrest:$hamcrestVersion")
+
+    testCompile("org.powermock:powermock-module-junit4:$powermockVersion")
+    testCompile("org.powermock:powermock-api-mockito2:$powermockVersion")
+
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}

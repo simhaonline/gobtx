@@ -1,0 +1,146 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main { compileClasspath += configurations.provided }
+}
+
+
+springBoot {
+    mainClassName = "com.gobtx.xchange.Application"
+}
+
+
+bootJar { enabled = true }
+//jar { enabled = true }
+
+
+configurations {
+    //suppose log4j2
+    all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    all*.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    all*.exclude module: 'spring-boot-starter-logging'
+
+    //NettyWebServer - Netty started on port(s): 8088
+    compile.exclude module: 'spring-boot-starter-tomcat'
+}
+
+
+dependencies {
+
+
+    compile project(":common")
+    compile project(":model")
+    compile project(":hazelcast_patch")
+    compile project(":hazelcast_model")
+
+    compile project(":xchange_common")
+    compile project(":xchange_hub")
+    compile project(":xchange_huobi")
+    compile project(":xchange_binance")
+
+    compile files("../libs/hazelcast-enterprise-all-3.12.2.jar")
+    compile files("../libs/hazelcast-enterprise-client-3.12.2.jar")
+
+    compile "com.lmax:disruptor:$disruptor"
+    compile "it.unimi.dsi:fastutil:$fastutil"
+    compile("com.github.rholder:guava-retrying:${retryer}")
+    compile "com.google.guava:guava:$guavaVersion"
+
+    compile("io.netty:netty-transport-native-epoll:${nettyVersion}:linux-x86_64")
+    compile("io.netty:netty-all:${nettyVersion}")
+    compile "org.apache.commons:commons-collections4:$collections4"
+
+    compile("commons-codec:commons-codec:${commonCodecVersion}")
+    compile("org.apache.commons:commons-lang3:${commonsLang3}")
+
+
+    compile("org.springframework.boot:spring-boot-starter") {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+
+    compile 'org.springframework.boot:spring-boot-starter-log4j2'
+
+    compile('org.springframework.boot:spring-boot-starter-data-jpa') {
+        exclude group: 'org.hibernate', module: 'hibernate-entitymanager'
+    }
+
+
+    compile("org.redisson:redisson:${redisson}")
+
+    compile 'org.springframework.boot:spring-boot-starter-jdbc'
+
+    runtimeOnly 'com.h2database:h2'
+
+
+    compile "mysql:mysql-connector-java:${mysqlConnector}"
+    compile "com.zaxxer:HikariCP:${hikari}"
+
+    compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+
+    testCompile('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    }
+
+
+    // Use JUnit test framework
+    testCompile 'junit:junit:4.12'
+    testCompile("com.h2database:h2:$h2Version")
+
+    testCompile("org.hamcrest:hamcrest:$hamcrestVersion")
+
+    testCompile("org.powermock:powermock-module-junit4:$powermockVersion")
+    testCompile("org.powermock:powermock-api-mockito2:$powermockVersion")
+
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}

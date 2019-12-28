@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2008-2018, Hazelcast, Inc. All Rights Reserved.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<hazelcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.hazelcast.com/schema/config
+                               http://www.hazelcast.com/schema/config/hazelcast-config-3.11.xsd"
+           xmlns="http://www.hazelcast.com/schema/config">
+
+    <group>
+        <name>MKT_DATA</name>
+        <password>dev-pass</password>
+    </group>
+
+
+    <map name="template">
+
+        <in-memory-format>BINARY</in-memory-format>
+        <indexes>
+            <index>symbol</index>
+            <!--<index ordered="true">timeKey</index>-->
+            <index ordered="true">openTime</index>
+        </indexes>
+        <backup-count>1</backup-count>
+        <async-backup-count>1</async-backup-count>
+
+        <near-cache>
+            <in-memory-format>OBJECT</in-memory-format>
+            <serialize-keys>true</serialize-keys>
+            <cache-local-entries>true</cache-local-entries>
+            <invalidate-on-change>true</invalidate-on-change>
+            <eviction eviction-policy="NONE"/><!-- max-size-policy="ENTRY_COUNT" size="10000"/>-->
+        </near-cache>
+
+    </map>
+</hazelcast>

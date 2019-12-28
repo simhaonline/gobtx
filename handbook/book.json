@@ -1,0 +1,93 @@
+{
+  "title": "GoBTX 开源交易所数据聚合平台",
+  "author": "AK2019",
+  "description": "GoBTX - BiT eXchange Entrance",
+  "language": "zh-hans",
+  "gitbook": "3.2.3",
+  "styles": {
+    "website": "./styles/website.css"
+  },
+  "structure": {
+    "readme": "README.md"
+  },
+  "links": {
+    "sidebar": {
+      "GoBTX": "https://gobtx.com"
+    }
+  },
+  "plugins": [
+    "-sharing",
+    "splitter",
+    "expandable-chapters-small",
+    "anchors",
+    "github",
+    "github-buttons",
+    "donate",
+    "sharing-plus",
+    "anchor-navigation-ex",
+    "favicon"
+  ],
+  "pluginsConfig": {
+    "github": {
+      "url": "https://github.com/arkenstonepro/gobtx"
+    },
+    "github-buttons": {
+      "buttons": [
+        {
+          "user": "arkenstonepro",
+          "repo": "gobtx",
+          "type": "star",
+          "size": "small",
+          "count": true
+        }
+      ]
+    },
+    "donate": {
+      "alipay": "../static/img/wx.jpg",
+      "title": "",
+      "button": "赞赏",
+      "alipayText": " "
+    },
+    "sharing": {
+      "douban": false,
+      "facebook": false,
+      "google": false,
+      "hatenaBookmark": false,
+      "instapaper": false,
+      "line": false,
+      "linkedin": false,
+      "messenger": false,
+      "pocket": false,
+      "qq": false,
+      "qzone": false,
+      "stumbleupon": false,
+      "twitter": false,
+      "viber": false,
+      "vk": false,
+      "weibo": false,
+      "whatsapp": false,
+      "all": [
+        "google",
+        "facebook",
+        "weibo",
+        "twitter",
+        "qq",
+        "qzone",
+        "linkedin",
+        "pocket"
+      ]
+    },
+    "anchor-navigation-ex": {
+      "showLevel": false
+    },
+    "favicon": {
+      "shortcut": "https://www.gobtx.com/assets/img/logo.png",
+      "bookmark": "https://www.gobtx.com/assets/img/logo.png",
+      "appleTouch": "https://www.gobtx.com/assets/img/logo.png",
+      "appleTouchMore": {
+        "120x120": "https://www.gobtx.com/assets/img/logo.png",
+        "180x180": "https://www.gobtx.com/assets/img/logo.png"
+      }
+    }
+  }
+}

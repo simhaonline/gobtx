@@ -1,0 +1,61 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+
+    compile "com.squareup.retrofit2:retrofit:$retrofit2Version"
+    compile "com.squareup.retrofit2:converter-jackson:$retrofit2Version"
+
+    //compile("com.squareup.retrofit2:adapter-rxjava:${retrofit2Version}")
+
+    compile("commons-codec:commons-codec:${commonCodecVersion}")
+    compile("org.apache.commons:commons-lang3:${commonsLang3}")
+
+
+
+    // Use JUnit test framework
+    testCompile("org.hamcrest:hamcrest:$hamcrestVersion")
+    testCompile("junit:junit:$junitVersion")
+
+
+}
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}

@@ -1,0 +1,93 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+dependencies {
+
+    compile project(":common")
+    compile project(":model")
+    compile project(":hazelcast_patch")
+    compile project(":hazelcast_model")
+
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.11.2'
+
+    //This will be decoded
+    compile("org.knowm.xchange:xchange-core:${xchangeVersion}")
+    compile("org.knowm.xchange:xchange-binance:$xchangeVersion")
+    compile("org.knowm.xchange:xchange-okcoin:$xchangeVersion")
+    compile("org.knowm.xchange:xchange-bitfinex:$xchangeVersion")
+    compile("org.knowm.xchange:xchange-bitmex:$xchangeVersion")
+    compile("org.knowm.xchange:xchange-huobi:$xchangeVersion")
+    compile("org.knowm.xchange:xchange-hitbtc:$xchangeVersion")
+
+
+    compile "com.lmax:disruptor:$disruptor"
+    compile("org.redisson:redisson:${redisson}")
+
+
+    runtimeOnly 'com.h2database:h2'
+
+    // Use JUnit test framework
+    testCompile 'junit:junit:4.12'
+    testCompile("com.h2database:h2:$h2Version")
+
+    testCompile("org.hamcrest:hamcrest:$hamcrestVersion")
+
+    testCompile("org.powermock:powermock-module-junit4:$powermockVersion")
+    testCompile("org.powermock:powermock-api-mockito2:$powermockVersion")
+
+
+    // https://mvnrepository.com/artifact/com.github.davidb/metrics-influxdb
+    compile group: 'com.github.davidb', name: 'metrics-influxdb', version: '1.1.0'
+
+
+    // https://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-core
+    compile group: 'io.dropwizard.metrics', name: 'metrics-core', version: '4.1.1'
+
+
+    // https://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-jvm
+    compile group: 'io.dropwizard.metrics', name: 'metrics-jvm', version: '4.1.1'
+
+
+    // https://mvnrepository.com/artifact/io.dropwizard.metrics/metrics-healthchecks
+    compile group: 'io.dropwizard.metrics', name: 'metrics-healthchecks', version: '4.1.1'
+
+
+}
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}

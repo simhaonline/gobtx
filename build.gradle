@@ -1,0 +1,81 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+apply plugin: 'java'
+apply plugin: 'idea'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+configurations {
+    //suppose log4j2
+    all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    all*.exclude group: 'org.springframework.boot',module:'spring-boot-starter-logging'
+    all*.exclude module : 'spring-boot-starter-logging'
+}
+
+
+compileJava {
+    options.compilerArgs << '-parameters'
+    options.fork = true
+    options.forkOptions.executable = 'javac'
+}
+
+dependencies {
+
+
+}
+
+
+allprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Xlint:-options"
+    }
+
+    group 'com.gobtx'
+    version "$releaseVersion"
+
+    /*configurations.all {
+        // check for updates every build
+        //resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        resolutionStrategy.cacheDynamicVersionsFor 10*60, 'seconds'
+    }*/
+
+
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+subprojects {
+    configurations.all {
+        // check for updates every build
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+        //resolutionStrategy.cacheDynamicVersionsFor 10*60, 'seconds'
+    }
+}
+
+if (!JavaVersion.current().java8Compatible)
+    throw new GradleException("CM system requires Java 8+, please upgrade to at least 1.8.0_112")
+
+
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}
+

@@ -1,0 +1,34 @@
+/*
+ */
+
+rootProject.name = 'btx-backend'
+
+
+include "common"
+include "model"
+
+
+include "xchange_common"
+include "xchange_hub"
+include "xchange_binance"
+include "xchange_huobi"
+include "xchange_okcoin"
+include "xchange_bybit"
+include "xchange"
+include "xchange_24statistic"
+
+
+include "web_common"
+include "web_rest"
+
+
+include "ws_server"
+
+
+include "binance-java-api"
+include "huobi-java-api"
+include "dev_tools"
+include "hazelcast_patch"
+include "hazelcast_model"
+
+//include "xchange_frontend"

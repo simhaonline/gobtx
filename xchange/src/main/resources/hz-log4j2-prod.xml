@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Properties>
+        <Property name="log-path">${env:TMP_LOG_DIR}/logs/app</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console-Appender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [${source}] %c{1} - %msg%n
+                </pattern>>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="Console-error-File-Appender" fileName="${log-path}/error.log"
+                     filePattern="${log-path}/error-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+
+        <RollingFile name="Hazelcast-File-Appender"
+                     fileName="${log-path}/hazelcast.log"
+                     filePattern="${log-path}/hazelcast-%d{yyyy-MM-dd}-%i.log.gz">
+
+            <PatternLayout>
+                <pattern>
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+
+        <AsyncLogger name="com.hazelcast" level="debug" includeLocation="true" additivity="false">
+            <AppenderRef ref="Hazelcast-File-Appender"/>
+        </AsyncLogger>
+
+        <Root level="ERROR" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-error-File-Appender"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

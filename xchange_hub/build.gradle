@@ -1,0 +1,70 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+dependencies {
+
+    compile project(":common")
+    compile project(":model")
+
+    compile "org.slf4j:slf4j-api:$slf4jVersion"
+    compile("org.apache.logging.log4j:log4j-slf4j-impl:${slf4j2Version}")
+
+    //compile "com.lmax:disruptor:$disruptor"
+    //compile "it.unimi.dsi:fastutil:$fastutil"
+
+    compile("io.netty:netty-transport-native-epoll:${nettyVersion}:linux-x86_64")
+    compile("io.netty:netty-all:${nettyVersion}")
+
+    // https://mvnrepository.com/artifact/io.protostuff/protostuff-core
+    //compile group: 'io.protostuff', name: 'protostuff-core', version: '1.6.2'
+    //compile group: 'io.protostuff', name: 'protostuff-runtime', version: '1.6.2'
+    //compile group: 'io.protostuff', name: 'protostuff-api', version: '1.6.2'
+
+
+    // Use JUnit test framework
+    testCompile("org.hamcrest:hamcrest:$hamcrestVersion")
+    testCompile("org.powermock:powermock-module-junit4:$powermockVersion")
+    testCompile("org.powermock:powermock-api-mockito2:$powermockVersion")
+
+    testCompile("junit:junit:$junitVersion")
+
+
+}
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}

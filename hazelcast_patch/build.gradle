@@ -1,0 +1,18 @@
+plugins {
+    // Apply the java-library plugin to add support for Java Library
+    id 'java-library'
+}
+
+dependencies {
+    compile files("../libs/hazelcast-enterprise-all-3.12.2.jar")
+    compile files("../libs/hazelcast-enterprise-client-3.12.2.jar")
+
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.11.2'
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}

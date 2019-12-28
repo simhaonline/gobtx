@@ -1,0 +1,9 @@
+/*
+ *
+ *
+ * This is the websocket API for the Frontend
+ *
+ *
+ */
+
+rootProject.name = 'ws_server'

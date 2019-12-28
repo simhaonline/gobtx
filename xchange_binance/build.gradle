@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+
+dependencies {
+
+    compile project(":common")
+    compile project(":model")
+    compile project(":hazelcast_patch")
+    compile project(":hazelcast_model")
+
+    compile project(":xchange_common")
+    compile project(":binance-java-api")
+
+    compileOnly("org.springframework:spring-context:${springVersion}")
+    compileOnly "com.google.guava:guava:$guavaVersion"
+    //compileOnly 'com.google.guava:guava:23.0'
+    compile("com.github.rholder:guava-retrying:${retryer}")
+
+    testCompile("org.hamcrest:hamcrest:$hamcrestVersion")
+    testCompile("junit:junit:$junitVersion")
+    testCompile("org.powermock:powermock-module-junit4:$powermockVersion")
+    testCompile("org.powermock:powermock-api-mockito2:$powermockVersion")
+
+
+}
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+idea {
+    module {
+        downloadJavadoc = true // defaults to false
+        downloadSources = true
+    }
+}

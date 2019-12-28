@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Properties>
+        <Property name="log-path">${env:TMP_LOG_DIR}/logs/app</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console-Appender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] [${source}] %c{1} - %msg%n
+                </pattern>>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="Console-error-File-Appender" fileName="${log-path}/error.log"
+                     filePattern="${log-path}/error-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="App-File-Appender" fileName="${log-path}/app.log"
+                     filePattern="${log-path}/app-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="SpringBoot-File-Appender" fileName="${log-path}/spring.log"
+                     filePattern="${log-path}/spring-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="Huobi-File-Appender" fileName="${log-path}/huobi.log"
+                     filePattern="${log-path}/huobi-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="Binance-File-Appender" fileName="${log-path}/binance.log"
+                     filePattern="${log-path}/binance-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="Netty-File-Appender" fileName="${log-path}/netty.log"
+                     filePattern="${log-path}/netty-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="Data-File-Appender"
+                     fileName="${log-path}/data.log"
+                     filePattern="${log-path}/data-%d{yyyy-MM-dd}-%i.log.gz">
+
+            <PatternLayout>
+                <pattern>
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="Trade-File-Appender"
+                     fileName="${log-path}/trade.log"
+                     filePattern="${log-path}/trade-%d{yyyy-MM-dd}-%i.log.gz">
+
+            <PatternLayout>
+                <pattern>
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} %msg%n
+                </pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="1 GB"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+
+        <AsyncLogger name="org.springframework" level="warn" includeLocation="true" additivity="false">
+            <AppenderRef ref="SpringBoot-File-Appender"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.gobtx" level="warn" includeLocation="true" additivity="false">
+            <AppenderRef ref="App-File-Appender"/>
+        </AsyncLogger>
+
+
+        <AsyncLogger name="com.huobi" level="warn" includeLocation="true" additivity="false">
+            <AppenderRef ref="Huobi-File-Appender"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.binance" level="warn" includeLocation="true" additivity="false">
+            <AppenderRef ref="Binance-File-Appender"/>
+        </AsyncLogger>
+
+
+        <AsyncLogger name="io.netty" level="WARN" additivity="false" includeLocation="true">
+            <AppenderRef ref="Netty-File-Appender"/>
+        </AsyncLogger>
+
+
+        <AsyncLogger name="data" level="warn" includeLocation="true" additivity="false">
+            <AppenderRef ref="Data-File-Appender"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="trade" level="warn" includeLocation="true" additivity="false">
+            <AppenderRef ref="Trade-File-Appender"/>
+        </AsyncLogger>
+
+        <Root level="ERROR" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-error-File-Appender"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

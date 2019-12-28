@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+    <Appenders>
+        <Console name="Console-Appender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>
+                    [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n
+                </pattern>>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+    <Loggers>
+
+
+        <AsyncLogger name="com.hazelcast" level="warn" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-Appender"/>
+        </AsyncLogger>
+
+
+
+        <AsyncLogger name="org.axonframework" level="debug" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-Appender"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="org.springframework" level="warn" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-Appender"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.goxtx" level="debug" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-Appender"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="com.goxtx" level="debug" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-Appender"/>
+        </AsyncLogger>
+
+        <AsyncLogger name="org.apache.kafka" level="debug" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-Appender"/>
+        </AsyncLogger>
+
+        <Root level="ERROR" includeLocation="true" additivity="false">
+            <AppenderRef ref="Console-Appender"/>
+        </Root>
+
+    </Loggers>
+</Configuration>

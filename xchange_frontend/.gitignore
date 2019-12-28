@@ -1,0 +1,47 @@
+.gradle/
+.gradle/4.7/
+.idea/
+/build/
+/log/
+/out/
+/logs/
+/dev/
+/classes/
+/data/
+/dist/
+/node_modules/
+/libs/axonserver-4.0.3.jar
+#!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+
+
+
+###project####
+*/out/
+
+
+##mac ds##
+.DS_Store
+src/.DS_Store

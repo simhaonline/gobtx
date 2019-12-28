@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GoBTX - BiT eXchange Entrance</title>
+
+    <meta name="keyWords" content="GoBTX BiT eXchange"></meta>
+    <meta name="author" content="GoBTX BiT eXchange"></meta>
+    <meta name="description" content="GoBTX BiT eXchange"></meta>
+
+
+</head>
+<body>
+
+
+<div id="layoutContainer"></div>
+
+
+<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    var marketURL = "ws://localhost:10240/ws";
+    var subRequest =
+        JSON.stringify({
+            path: 'subscribe',
+            parameters: {
+                symbols: "BTCUSDT",
+                exchange: "BINANCE",
+                interval: "m1"
+            }
+        });
+
+    var ws = window['MozWebSocket'] ? new MozWebSocket(marketURL) : window['WebSocket'] ? new WebSocket(marketURL) : null;
+
+    ws.binaryType = 'arraybuffer';
+    ws.onopen = function () {
+        console.log('服务器连接成功');
+        ws.send(subRequest);
+    };
+
+    ws.onclose = function () {
+        console.log('服务器断开');
+    };
+
+    ws.onmessage = function (evt) {
+        console.log("消息>>>>>>>>>>>>>>>>>")
+        console.log(evt.data);
+    };
+
+</script>
+
+
+</body>
+</html>
